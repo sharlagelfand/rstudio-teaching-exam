@@ -17,7 +17,6 @@ class: center
 ```{r, include = FALSE}
 library(flair)
 
-
 library(xaringanthemer)
 style_duo(
   primary_color = "#1F4257",
@@ -69,6 +68,7 @@ Now let's write our own!
 
 ???
 
+As an R user, you already know how to use functions! Functions enable everything we do in R
 
 Functions allow you to better organize and reuse your code - so today we're going to learn how to write our own.
 
@@ -82,9 +82,15 @@ Americans give measurements in ounces.
 
 ```{r}
 8 * 28.349
+```
 
+--
+
+```{r}
 16 * 28.349
 ``` 
+
+--
 
 If I only had an R function instead of doing the same thing over and over
 
@@ -147,6 +153,8 @@ Body
 Clearly and meaningfully - write code that is easier to understand!
 
 `convert_ounces_to_grams`
+
+--
 
 I like **snake_case**, some people like **camelCase** - use whatever feels right!
 
@@ -237,8 +245,10 @@ convert_ounces_to_grams(ounces = 8, digits = 0)
 convert_ounces_to_grams(ounces = 8, digits = 1)
 ```
 
+---
+# Argument order
 
-NAMING ARGUMENTS??
+Data first, details after
 ---
 
 Exercise on arguments and orders
@@ -249,24 +259,41 @@ Exercise on arguments and orders
 
 A **default** value that your function uses for an argument if nothing is supplied
 
-```{r}
+--
+
+```{r default-arguments, include = FALSE}
 convert_ounces_to_grams <- function(ounces, digits = 0) {
   round(ounces * 28.349, digits = digits)
 }
 ```
 
+```{r, echo = FALSE}
+decorate_chunk("default-arguments") %>%
+  flair("digits = 0")
+```
+
+--
+
 ```{r}
 convert_ounces_to_grams(ounces = 8)
 ```
 
+--
+
 Set the default to the value you want most often!
 
+--
+
 If you're using another well-known function, it's best to have the defaults match!
+
+```{r}
+round(1.9)
+```
 
 
 ---
 
-Exercise on default arguments, live coding?
+# Calling arguments
 
 ---
 
@@ -281,6 +308,8 @@ convert_ounces_to_grams <- function(ounces, digits = 0) {
 ```
 
 We don't have to tell the function to return `round()`... it just does
+
+HIGHLIGHT THE INSIDE
 
 ---
 
@@ -310,3 +339,9 @@ convert_ounces_to_grams <- function(ounces, digits = 0) {
   round(ounces * 28.349, digits = digits)
 }
 ```
+
+Functions are **named** meaningfully to help you write easier to understand code.
+
+They take **arguments** which dictate what data your function is run on and the details of how it's run.
+
+And they have a body, which can contain complicated calculations, but is self contained.
