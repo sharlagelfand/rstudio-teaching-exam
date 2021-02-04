@@ -45,8 +45,7 @@ Calculating a mean...
 .pull-left[
 Making a plot...
 
-`ggplot() + 
-  geom_point()`
+`ggplot() + geom_point()`
 ]
 
 --
@@ -61,8 +60,6 @@ Fitting a model...
 
 Functions help you organize and reuse code.
 
-Now let's write our own! 
-
 ???
 
 As an R user, you already know how to use functions! Functions enable everything we do in R
@@ -71,11 +68,72 @@ Functions allow you to better organize and reuse your code - so today we're goin
 
 ---
 
+# Why functions?
+
+1. Make your code easier to read, and focus on the big picture
+
+2. Easier to make changes
+
+3. Reduce mistakes from copy and pasting code
+
+???
+
+Rather than having the same computation over and over, focus on what changes
+
+If you need to make a change to how a bit of code works, you only have to update it in one place
+
+You reduce the changes of making mistakes from copy and pasting code (and not doing it properly!)
+
+---
+
+# Why functions?
+
+.pull-left[
+
+```r
+mean(1:10)
+```
+
+```
+## [1] 5.5
+```
+
+```r
+mean(1:5)
+```
+
+```
+## [1] 3
+```
+]
+
+--
+
+.pull-right[
+
+```r
+(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10) / 10
+```
+
+```
+## [1] 5.5
+```
+
+```r
+(1 + 2 + 4 + 5) / 5
+```
+
+```
+## [1] 2.4
+```
+]
+
+
+---
+
 I love to cook!
 
 Americans give measurements in ounces.
-
-TODO picture
 
 --
 
@@ -125,6 +183,10 @@ convert_ounces_to_grams(ounces = 8)
 ## [1] 226.792
 ```
 
+???
+
+Uses the value of 8 for "ounces"
+
 --
 
 
@@ -170,11 +232,6 @@ It takes &lt;span style = "background-color: #ffbf7f"&gt;**arguments**&lt;/span&
 The &lt;span style = "background-color: #ff7f7f"&gt;**body**&lt;/span&gt; contains code for calculations - whatever you're trying to achieve!
 
 ---
-class: middle, center
-
-### Time for an exercise!
-
----
 
 # Naming functions
 
@@ -189,6 +246,8 @@ Clearly, meaningfully, unambiguously - write code that is easier to understand!
 I like **snake_case**, some people like **camelCase** - use whatever feels right!
 
 ???
+
+Communicate the intent of the code - having convert_ounces_to_grams is a lot more meaningful than * 28.349 everywhere
 
 Functions should be named clearly and meaningfully, to help yourself write (and read!) code that is easier to understand - the names are for people as much as for computers!
 
@@ -251,7 +310,7 @@ ounces is an argument that describes what the function is being run on
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, &lt;span style="background-color:#ffff7f"&gt;digits) {&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;round(ounces * 28.349, digits = digits)&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, &lt;span style="background-color:#ffff7f"&gt;digits&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;round&lt;/span&gt;(ounces * 28.349, &lt;span style="background-color:#ffff7f"&gt;digits&lt;/span&gt; = &lt;span style="background-color:#ffff7f"&gt;digits&lt;/span&gt;)&lt;br&gt;}&lt;/code&gt;
 
 
 ```r
@@ -273,7 +332,7 @@ convert_ounces_to_grams(ounces = 8, digits = 1)
 
 ???
 
-Can add more arguments that control *how* it's run - my scale doesn't have descimals
+Can add more arguments that control *how* it's run - my scale doesn't have decimals
 
 ---
 
@@ -311,7 +370,9 @@ convert_ounces_to_grams(8, digits = 0)
 
 # Default arguments
 
-A **default** value that your function uses for an argument if nothing is supplied
+A **default** value that your function uses for an argument if nothing is supplied.
+
+If an argument *doesn't* have a default value, you have to supply something.
 
 ### Live coding time!
 
@@ -333,9 +394,20 @@ convert_ounces_to_grams(ounces = 8)
 ## [1] 227
 ```
 
---
 
-Set the default to the value you want most often!
+```r
+convert_ounces_to_grams()
+```
+
+```
+## Error in convert_ounces_to_grams(): argument "ounces" is missing, with no default
+```
+
+---
+
+# Default arguments
+
+Set the default to the value you want most often - sensible defaults.
 
 --
 
@@ -367,16 +439,22 @@ The **body** of a function contains all calculations - hopefully you know what t
 
 Can write comments, create intermediate variables, just like in the rest of the code we write.
 
-If your function is complicated, best to split up the different steps and explain what's going on.
+If your function is complicated, best to split up the different steps and explain what's going on. These don't exist outside of the function.
+
+Function body is self-contained!
 
 
 
 
 &lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;grams &lt;- ounces * 28.349&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;# Apply rounding&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;round(grams, digits = digits)&lt;br&gt;}&lt;/code&gt;
 
+TODO LIVE CODING
+
+TODO TYPE OUT "grams" and show that it doesn't exist
+
 ---
 
-# Function body
+# Return values
 
 Function returns the last value computed by default - we don't have to tell it to return `round()...`
 
@@ -385,9 +463,22 @@ Function returns the last value computed by default - we don't have to tell it t
 
 &lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;round(grams, digits = digits)&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
 
+
 ---
 
-# Function body
+# Return values
+
+You can tell it to return something explicitly with `return()`
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;return&lt;/span&gt;(round(grams, digits = digits))&lt;br&gt;}&lt;/code&gt;
+
+
+---
+
+# Returning early
 
 Sometimes you don't need to go through the whole function.
 
@@ -400,17 +491,6 @@ What is 0 ounces?
 
 
 &lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;if (ounces == 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return(0)&lt;br&gt;&amp;nbsp;&amp;nbsp;}&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;round(grams, digits = digits)&lt;br&gt;}&lt;/code&gt;
-
-Return "early" via `round()`.
-
-
-```r
-convert_ounces_to_grams(0)
-```
-
-```
-## [1] 0
-```
 
 ---
 
@@ -427,7 +507,9 @@ Functions are **named** meaningfully to help you write easier to understand code
 
 They take **arguments** which dictate what data your function is run on and the details of how it's run.
 
-They have a **body**, which can contain complicated calculations.
+They have a **body**, which can contain complicated calculations, but are self-contained.
+
+Functions reduce repetition and errors TODO stronger here
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
