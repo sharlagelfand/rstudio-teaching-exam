@@ -95,37 +95,3 @@ question("What would you use as the default value for `na.rm` in `mean_and_var`?
   answer("`TRUE`", message = "`mean` and `var` both use `na.rm = FALSE` as the default, so it may be confusing and inconsistent if `mean_and_var` removes the `NA`s by default.")
 )
 ```
-
-## Exercise: Return Values
-
-TODO finalize exercise
-Here is the start of a function to return the mean and variance of a vector, x. How would you return both values?
-
-```{r, eval = FALSE}
-mean_and_var <- function(x) {
-   x_mean <- mean(x)
-   x_var <- var(x)
-   
-   return(____)
-}
-```
-
-```{r, eval = FALSE}
-mean_and_var <- function(x, na.rm) {
-   x_mean <- mean(x, na.rm)
-   x_var <- var(x, na.rm)
-   
-   return(
-      list(mean = x_mean,
-           var = x_var)
-   )
-}
-
-mean_and_var(1:10)
-```
-
-
-TODO guess what function returns
----
-
-
