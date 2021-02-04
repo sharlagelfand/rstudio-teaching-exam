@@ -1,0 +1,508 @@
+---
+title: "Writing Functions in R"
+subtitle: "RStudio Instructor Certification Teaching Exam"
+author: "Sharla Gelfand"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "pull.css"]
+    nature:
+      countIncrementalSlides: false
+      ratio: 16:9
+---
+class: center
+
+```{r, include = FALSE}
+library(flair)
+
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1F4257",
+  text_slide_number_font_size = "0em"
+)
+```
+
+### You already know how to use functions!
+
+--
+
+.pull-left[
+Reading a CSV...
+
+`read_csv()`
+]
+
+--
+
+.pull-right[
+Calculating a mean...
+
+`mean()`
+]
+
+--
+
+.pull-left[
+Making a plot...
+
+`ggplot() + geom_point()`
+]
+
+--
+
+.pull-right[
+Fitting a model...
+
+`lm(y~x)`
+]
+
+--
+
+Functions help you organize and reuse code.
+
+???
+
+As an R user, you already know how to use functions! Functions enable everything we do in R
+
+Functions allow you to better organize and reuse your code - so today we're going to learn how to write our own.
+
+---
+
+# Why functions?
+
+1. Make your code easier to read, and focus on the big picture
+
+2. Easier to make changes
+
+3. Reduce mistakes from copy and pasting code
+
+???
+
+Rather than having the same computation over and over, focus on what changes
+
+If you need to make a change to how a bit of code works, you only have to update it in one place
+
+You reduce the changes of making mistakes from copy and pasting code (and not doing it properly!)
+
+---
+
+# Why functions?
+
+.pull-left[
+```{r}
+mean(1:10)
+mean(1:5)
+```
+]
+
+--
+
+.pull-right[
+```{r}
+(1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10) / 10
+(1 + 2 + 4 + 5) / 5
+```
+]
+
+
+---
+
+I love to cook!
+
+Americans give measurements in ounces.
+
+--
+
+```{r}
+8 * 28.349
+```
+
+--
+
+```{r}
+16 * 28.349
+``` 
+
+--
+
+If I only had an R function instead of doing the same thing over and over
+
+---
+
+## Let's write one!
+
+--
+
+```{r initial-function, include = FALSE}
+convert_ounces_to_grams <- function(ounces) {
+  ounces * 28.349
+}
+```
+
+```{r, echo = FALSE}
+decorate("initial-function")
+```
+
+--
+
+```{r}
+convert_ounces_to_grams(ounces = 8)
+```
+
+???
+
+Uses the value of 8 for "ounces"
+
+--
+
+```{r}
+convert_ounces_to_grams(ounces = 16)
+```
+
+---
+
+# Components of a function
+
+```{r, echo = FALSE}
+decorate("initial-function") %>% 
+  flair("convert_ounces_to_grams", background = "#ffff7f")
+```
+
+A function has a <span style = "background-color: #ffff7f">**name**</span>.
+
+---
+
+# Components of a function
+
+```{r, echo = FALSE}
+decorate("initial-function") %>% 
+  flair("convert_ounces_to_grams", background = "#ffff7f") %>% 
+  flair_rx("(?<=\\().+?(?=\\))", background = "#ffbf7f")
+```
+
+A function has a <span style = "background-color: #ffff7f">**name**</span>.
+
+It takes <span style = "background-color: #ffbf7f">**arguments**</span>.
+
+---
+
+# Components of a function
+
+```{r, echo = FALSE}
+decorate("initial-function") %>% 
+  flair("convert_ounces_to_grams", background = "#ffff7f") %>% 
+  flair_rx("(?<=\\().+?(?=\\))", background = "#ffbf7f") %>%
+  flair("ounces * 28.349", background = "#ff7f7f")
+```
+
+A function has a <span style = "background-color: #ffff7f">**name**</span>.
+
+It takes <span style = "background-color: #ffbf7f">**arguments**</span>.
+
+The <span style = "background-color: #ff7f7f">**body**</span> contains code for calculations - whatever you're trying to achieve!
+
+---
+
+# Naming functions
+
+Clearly, meaningfully, unambiguously - write code that is easier to understand!
+
+--
+
+`convert_ounces_to_grams`
+
+--
+
+I like **snake_case**, some people like **camelCase** - use whatever feels right!
+
+???
+
+Communicate the intent of the code - having convert_ounces_to_grams is a lot more meaningful than * 28.349 everywhere
+
+Functions should be named clearly and meaningfully, to help yourself write (and read!) code that is easier to understand - the names are for people as much as for computers!
+
+I like to use snake_case, but some people like camelCase - use whatever feels right for you!
+
+---
+class: center, middle
+
+### Time for an exercise!
+
+--
+
+Imagine you're writing a function to convert kilograms to pounds.
+
+Which name would you choose for your function?
+
+`weight_converter()`
+
+`convert_kg_to_lb()`
+
+`kgtolb()`
+
+`Kilogram_ToPounds()`
+
+---
+
+# Arguments
+
+Inputs that describe how the function runs.
+
+```{r data-argument-8, include = FALSE}
+convert_ounces_to_grams(ounces = 8)
+```
+
+```{r, echo = FALSE}
+decorate_chunk("data-argument-8") %>%
+  flair("ounces = 8")
+```
+
+```{r data-argument-16, include = FALSE}
+convert_ounces_to_grams(ounces = 16)
+```
+
+```{r, echo = FALSE}
+decorate_chunk("data-argument-16") %>%
+  flair("ounces = 16")
+```
+
+???
+
+ounces is an argument that describes what the function is being run on
+---
+
+# Arguments
+
+```{r details-argument, include = FALSE}
+convert_ounces_to_grams <- function(ounces, digits) {
+  round(ounces * 28.349, digits = digits)
+}
+```
+
+```{r, echo = FALSE}
+decorate_chunk("details-argument") %>%
+  flair("digits") %>%
+  flair("round")
+```
+
+--
+
+```{r}
+convert_ounces_to_grams(ounces = 8, digits = 0)
+```
+
+```{r}
+convert_ounces_to_grams(ounces = 8, digits = 1)
+```
+
+???
+
+Can add more arguments that control *how* it's run - my scale doesn't have decimals
+
+---
+
+TODO REMOVE
+
+# Calling arguments
+
+It can be verbose to specify `ounces` every time!
+
+--
+
+You don't have to name the arguments if you're supplying them in the order they were defined
+
+```{r}
+convert_ounces_to_grams(8, 0)
+```
+
+--
+
+But sometimes that makes your code tough to understang
+
+```{r}
+convert_ounces_to_grams(8, digits = 0)
+```
+
+---
+
+# Default arguments
+
+A **default** value that your function uses for an argument if nothing is supplied.
+
+If an argument *doesn't* have a default value, you have to supply something.
+
+### Live coding time!
+
+--
+
+```{r default-arguments, include = FALSE}
+convert_ounces_to_grams <- function(ounces, digits = 0) {
+  round(ounces * 28.349, digits = digits)
+}
+```
+
+```{r, echo = FALSE}
+decorate_chunk("default-arguments") %>%
+  flair("digits = 0")
+```
+
+--
+
+```{r}
+convert_ounces_to_grams(ounces = 8)
+```
+
+```{r, error = TRUE}
+convert_ounces_to_grams()
+```
+
+---
+
+# Default arguments
+
+Set the default to the value you want most often.
+
+--
+
+If you're using another well-known function, it's a good idea to have the defaults match!
+
+```{r}
+round(1.9)
+```
+
+TODO SCREENSHOT
+
+---
+
+# Function body
+
+The **body** of a function contains all calculations - hopefully you know what to put here!   
+
+```{r body, include = FALSE}
+convert_ounces_to_grams <- function(ounces, digits = 0) {
+  round(ounces * 28.349, digits = digits)
+}
+```
+
+```{r, echo = FALSE}
+decorate_chunk("body") %>%
+  flair("round(ounces * 28.349, digits = digits)")
+```
+
+---
+
+# Function body
+
+The body of a function is **self-contained**, and we can write comments, create intermediate variables, just like in the rest of the code we write.
+
+If your function is complicated, best to split up the different steps and explain what's going on. These don't exist outside of the function.
+
+### Live coding time!
+
+--
+
+```{r body-complicated, include = FALSE}
+convert_ounces_to_grams <- function(ounces, digits = 0) {
+  grams <- ounces * 28.349
+  
+  # Apply rounding
+  round(grams, digits = digits)
+}
+```
+
+```{r, echo = FALSE}
+decorate_chunk("body-complicated") %>%
+  flair("grams <- ounces * 28.349") %>%
+  flair("# Apply rounding")
+```
+
+---
+
+# Return values
+
+Function returns the last value computed by default - we don't have to tell it to return `round()...`
+
+```{r body-return, include = FALSE}
+convert_ounces_to_grams <- function(ounces, digits = 0) {
+  grams <- ounces * 28.349
+  
+  # Apply rounding
+  round(grams, digits = digits)
+}
+```
+
+```{r, echo = FALSE}
+decorate_chunk("body-return") %>%
+  flair("round(grams, digits = digits)")
+```
+
+
+---
+
+# Return values
+
+You can tell it to return something explicitly with `return()`
+
+```{r body-return-explicit, include = FALSE}
+convert_ounces_to_grams <- function(ounces, digits = 0) {
+  grams <- ounces * 28.349
+  
+  # Apply rounding
+  return(round(grams, digits = digits))
+}
+```
+
+```{r, echo = FALSE}
+decorate_chunk("body-return-explicit") %>%
+  flair("return")
+```
+
+
+---
+
+# Returning early
+
+Sometimes you don't need to go through the whole function.
+
+What is 0 ounces?
+
+--
+
+```{r, return-early, include = FALSE}
+convert_ounces_to_grams <- function(ounces, digits = 0) {
+  if (ounces == 0) {
+    return(0)
+  }
+  
+  grams <- ounces * 28.349
+  
+  # Apply rounding
+  round(grams, digits = digits)
+}
+```
+
+
+```{r, echo = FALSE}
+decorate_chunk("return-early") %>%
+  flair("if (ounces == 0) {
+    return(0)
+  }")
+```
+
+---
+
+# Wrapping up
+
+```{r}
+convert_ounces_to_grams <- function(ounces, digits = 0) {
+  round(ounces * 28.349, digits = digits)
+}
+```
+
+Functions are **named** meaningfully to help you write easier to understand code.
+
+They take **arguments** which dictate what data your function is run on and the details of how it's run.
+
+They have a **body**, which can contain complicated calculations, but are self-contained.
+
+Functions reduce repetition and errors TODO stronger here
