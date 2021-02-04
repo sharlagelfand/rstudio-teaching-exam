@@ -4,7 +4,6 @@
     <title>Writing Functions in R</title>
     <meta charset="utf-8" />
     <meta name="author" content="Sharla Gelfand" />
-    <script src="libs/header-attrs-2.6/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="pull.css" type="text/css" />
   </head>
@@ -203,7 +202,7 @@ convert_ounces_to_grams(ounces = 16)
 # Components of a function
 
 
-&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;convert_ounces_to_grams&lt;/span&gt; &lt;- function(ounces) {&lt;br&gt;&amp;nbsp;&amp;nbsp;ounces * 28.349&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;&lt;span style='background-color:#ffff7f'&gt;convert_ounces_to_grams&lt;/span&gt; &lt;- function(ounces) {&lt;br&gt;&amp;nbsp;&amp;nbsp;ounces * 28.349&lt;br&gt;}&lt;/code&gt;
 
 A function has a &lt;span style = "background-color: #ffff7f"&gt;**name**&lt;/span&gt;.
 
@@ -212,7 +211,7 @@ A function has a &lt;span style = "background-color: #ffff7f"&gt;**name**&lt;/sp
 # Components of a function
 
 
-&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;convert_ounces_to_grams&lt;/span&gt; &lt;- function(&lt;span style="background-color:#ffbf7f"&gt;ounces&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;ounces * 28.349&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;&lt;span style='background-color:#ffff7f'&gt;convert_ounces_to_grams&lt;/span&gt; &lt;- function(&lt;span style='background-color:#ffbf7f'&gt;ounces&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;ounces * 28.349&lt;br&gt;}&lt;/code&gt;
 
 A function has a &lt;span style = "background-color: #ffff7f"&gt;**name**&lt;/span&gt;.
 
@@ -223,7 +222,7 @@ It takes &lt;span style = "background-color: #ffbf7f"&gt;**arguments**&lt;/span&
 # Components of a function
 
 
-&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;convert_ounces_to_grams&lt;/span&gt; &lt;- function(&lt;span style="background-color:#ffbf7f"&gt;ounces&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ff7f7f"&gt;ounces * 28.349&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;&lt;span style='background-color:#ffff7f'&gt;convert_ounces_to_grams&lt;/span&gt; &lt;- function(&lt;span style='background-color:#ffbf7f'&gt;ounces&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:#ff7f7f'&gt;ounces * 28.349&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
 
 A function has a &lt;span style = "background-color: #ffff7f"&gt;**name**&lt;/span&gt;.
 
@@ -281,7 +280,7 @@ Inputs that describe how the function runs.
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams(&lt;span style="background-color:#ffff7f"&gt;ounces = 8&lt;/span&gt;)&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams(&lt;span style='background-color:#ffff7f'&gt;ounces = 8&lt;/span&gt;)&lt;/code&gt;
 
 ```
 
@@ -292,7 +291,7 @@ Inputs that describe how the function runs.
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams(&lt;span style="background-color:#ffff7f"&gt;ounces = 16&lt;/span&gt;)&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams(&lt;span style='background-color:#ffff7f'&gt;ounces = 16&lt;/span&gt;)&lt;/code&gt;
 
 ```
 
@@ -310,7 +309,9 @@ ounces is an argument that describes what the function is being run on
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, &lt;span style="background-color:#ffff7f"&gt;digits&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;round&lt;/span&gt;(ounces * 28.349, &lt;span style="background-color:#ffff7f"&gt;digits&lt;/span&gt; = &lt;span style="background-color:#ffff7f"&gt;digits&lt;/span&gt;)&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, &lt;span style='background-color:#ffff7f'&gt;digits&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;round&lt;/span&gt;(ounces * 28.349, &lt;span style='background-color:#ffff7f'&gt;digits&lt;/span&gt; = &lt;span style='background-color:#ffff7f'&gt;digits&lt;/span&gt;)&lt;br&gt;}&lt;/code&gt;
+
+--
 
 
 ```r
@@ -335,6 +336,8 @@ convert_ounces_to_grams(ounces = 8, digits = 1)
 Can add more arguments that control *how* it's run - my scale doesn't have decimals
 
 ---
+
+TODO REMOVE
 
 # Calling arguments
 
@@ -381,7 +384,7 @@ If an argument *doesn't* have a default value, you have to supply something.
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, &lt;span style="background-color:#ffff7f"&gt;digits = 0&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;round(ounces * 28.349, digits = digits)&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, &lt;span style='background-color:#ffff7f'&gt;digits = 0&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;round(ounces * 28.349, digits = digits)&lt;br&gt;}&lt;/code&gt;
 
 --
 
@@ -407,7 +410,7 @@ convert_ounces_to_grams()
 
 # Default arguments
 
-Set the default to the value you want most often - sensible defaults.
+Set the default to the value you want most often.
 
 --
 
@@ -422,6 +425,8 @@ round(1.9)
 ## [1] 2
 ```
 
+TODO SCREENSHOT
+
 ---
 
 # Function body
@@ -431,26 +436,24 @@ The **body** of a function contains all calculations - hopefully you know what t
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;round(ounces * 28.349, digits = digits)&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;round(ounces * 28.349, digits = digits)&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
 
 ---
 
 # Function body
 
-Can write comments, create intermediate variables, just like in the rest of the code we write.
+The body of a function is **self-contained**, and we can write comments, create intermediate variables, just like in the rest of the code we write.
 
 If your function is complicated, best to split up the different steps and explain what's going on. These don't exist outside of the function.
 
-Function body is self-contained!
+### Live coding time!
+
+--
 
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;grams &lt;- ounces * 28.349&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;# Apply rounding&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;round(grams, digits = digits)&lt;br&gt;}&lt;/code&gt;
-
-TODO LIVE CODING
-
-TODO TYPE OUT "grams" and show that it doesn't exist
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;grams &lt;- ounces * 28.349&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;# Apply rounding&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;round(grams, digits = digits)&lt;br&gt;}&lt;/code&gt;
 
 ---
 
@@ -461,7 +464,7 @@ Function returns the last value computed by default - we don't have to tell it t
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;round(grams, digits = digits)&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;round(grams, digits = digits)&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
 
 
 ---
@@ -473,7 +476,7 @@ You can tell it to return something explicitly with `return()`
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;return&lt;/span&gt;(round(grams, digits = digits))&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;return&lt;/span&gt;(round(grams, digits = digits))&lt;br&gt;}&lt;/code&gt;
 
 
 ---
@@ -490,7 +493,7 @@ What is 0 ounces?
 
 
 
-&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;if (ounces == 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return(0)&lt;br&gt;&amp;nbsp;&amp;nbsp;}&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;round(grams, digits = digits)&lt;br&gt;}&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;if (ounces == 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return(0)&lt;br&gt;&amp;nbsp;&amp;nbsp;}&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;round(grams, digits = digits)&lt;br&gt;}&lt;/code&gt;
 
 ---
 

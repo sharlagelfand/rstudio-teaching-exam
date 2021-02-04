@@ -285,6 +285,8 @@ decorate_chunk("details-argument") %>%
   flair("round")
 ```
 
+--
+
 ```{r}
 convert_ounces_to_grams(ounces = 8, digits = 0)
 ```
@@ -298,6 +300,8 @@ convert_ounces_to_grams(ounces = 8, digits = 1)
 Can add more arguments that control *how* it's run - my scale doesn't have decimals
 
 ---
+
+TODO REMOVE
 
 # Calling arguments
 
@@ -356,7 +360,7 @@ convert_ounces_to_grams()
 
 # Default arguments
 
-Set the default to the value you want most often - sensible defaults.
+Set the default to the value you want most often.
 
 --
 
@@ -365,6 +369,8 @@ If you're using another well-known function, it's a good idea to have the defaul
 ```{r}
 round(1.9)
 ```
+
+TODO SCREENSHOT
 
 ---
 
