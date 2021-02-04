@@ -7,8 +7,6 @@ output:
     lib_dir: libs
     css: ["xaringan-themer.css", "pull.css"]
     nature:
-      highlightStyle: github
-      highlightLines: true
       countIncrementalSlides: false
       ratio: 16:9
 ---
@@ -18,9 +16,8 @@ class: center
 library(flair)
 
 library(xaringanthemer)
-style_duo_accent(
-  primary_color = "#1F4257",
-  secondary_color = "#F97B64",
+style_mono_accent(
+  base_color = "#1F4257",
   text_slide_number_font_size = "0em"
 )
 ```
@@ -78,6 +75,8 @@ I love to cook!
 
 Americans give measurements in ounces.
 
+TODO picture
+
 --
 
 ```{r}
@@ -100,25 +99,6 @@ If I only had an R function instead of doing the same thing over and over
 
 --
 
-```{r}
-convert_ounces_to_grams <- function(ounces) {
-  ounces * 28.349
-}
-```
-
---
-
-```{r}
-convert_ounces_to_grams(ounces = 8)
-convert_ounces_to_grams(ounces = 16)
-```
-
----
-
-# Components of a function
-
-A function has a **name**:
-
 ```{r initial-function, include = FALSE}
 convert_ounces_to_grams <- function(ounces) {
   ounces * 28.349
@@ -126,37 +106,75 @@ convert_ounces_to_grams <- function(ounces) {
 ```
 
 ```{r, echo = FALSE}
-decorate("initial-function") %>% 
-  flair("convert_ounces_to_grams")
+decorate("initial-function")
+```
+
+--
+
+```{r}
+convert_ounces_to_grams(ounces = 8)
+```
+
+--
+
+```{r}
+convert_ounces_to_grams(ounces = 16)
 ```
 
 ---
 
 # Components of a function
 
-A function takes **arguments**:
-
 ```{r, echo = FALSE}
 decorate("initial-function") %>% 
-  flair_rx("(?<=\\().+?(?=\\))")
+  flair("convert_ounces_to_grams", background = "#ffff7f")
 ```
+
+A function has a <span style = "background-color: #ffff7f">**name**</span>.
 
 ---
 
 # Components of a function
 
-The **body** of a function is used for computations:
+```{r, echo = FALSE}
+decorate("initial-function") %>% 
+  flair("convert_ounces_to_grams", background = "#ffff7f") %>% 
+  flair_rx("(?<=\\().+?(?=\\))", background = "#ffbf7f")
+```
+
+A function has a <span style = "background-color: #ffff7f">**name**</span>.
+
+It takes <span style = "background-color: #ffbf7f">**arguments**</span>.
+
+---
+
+# Components of a function
 
 ```{r, echo = FALSE}
 decorate("initial-function") %>% 
-  flair("ounces * 28.349")
+  flair("convert_ounces_to_grams", background = "#ffff7f") %>% 
+  flair_rx("(?<=\\().+?(?=\\))", background = "#ffbf7f") %>%
+  flair("ounces * 28.349", background = "#ff7f7f")
 ```
+
+A function has a <span style = "background-color: #ffff7f">**name**</span>.
+
+It takes <span style = "background-color: #ffbf7f">**arguments**</span>.
+
+The <span style = "background-color: #ff7f7f">**body**</span> contains code for calculations - whatever you're trying to achieve!
+
+---
+class: middle, center
+
+### Time for an exercise!
 
 ---
 
 # Naming functions
 
-Clearly and meaningfully - write code that is easier to understand!
+Clearly, meaningfully, unambiguously - write code that is easier to understand!
+
+--
 
 `convert_ounces_to_grams`
 
@@ -168,14 +186,12 @@ I like **snake_case**, some people like **camelCase** - use whatever feels right
 
 Functions should be named clearly and meaningfully, to help yourself write (and read!) code that is easier to understand - the names are for people as much as for computers!
 
-convert_oz_to_grams()
-
 I like to use snake_case, but some people like camelCase - use whatever feels right for you!
 
 ---
-class: inverse, center, middle
+class: center, middle
 
-# Time for an exercise!
+### Time for an exercise!
 
 --
 
@@ -195,18 +211,32 @@ Which name would you choose for your function?
 
 # Arguments
 
-**Data**: what the function works on
+Inputs that describe how the function runs.
 
-```{r data-argument, include = FALSE}
+```{r data-argument-8, include = FALSE}
 convert_ounces_to_grams(ounces = 8)
 ```
 
 ```{r, echo = FALSE}
-decorate_chunk("data-argument") %>%
+decorate_chunk("data-argument-8") %>%
   flair("ounces = 8")
 ```
 
-**Details**: how the computation is run
+```{r data-argument-16, include = FALSE}
+convert_ounces_to_grams(ounces = 16)
+```
+
+```{r, echo = FALSE}
+decorate_chunk("data-argument-16") %>%
+  flair("ounces = 16")
+```
+
+???
+
+ounces is an argument that describes what the function is being run on
+---
+
+# Arguments
 
 ```{r details-argument, include = FALSE}
 convert_ounces_to_grams <- function(ounces, digits) {
@@ -216,15 +246,23 @@ convert_ounces_to_grams <- function(ounces, digits) {
 
 ```{r, echo = FALSE}
 decorate_chunk("details-argument") %>%
-  flair("digits)")
+  flair("digits) {")
 ```
-
 
 ```{r}
 convert_ounces_to_grams(ounces = 8, digits = 0)
 ```
 
+```{r}
+convert_ounces_to_grams(ounces = 8, digits = 1)
+```
+
+???
+
+Can add more arguments that control *how* it's run - my scale doesn't have descimals
+
 ---
+
 # Calling arguments
 
 It can be verbose to specify `ounces` every time!
@@ -245,19 +283,13 @@ But sometimes that makes your code tough to understang
 convert_ounces_to_grams(8, digits = 0)
 ```
 
---
-
-Data first, details after.
-
----
-
-Exercise on arguments and orders
-
 ---
 
 # Default arguments
 
 A **default** value that your function uses for an argument if nothing is supplied
+
+### Live coding time!
 
 --
 
@@ -294,7 +326,7 @@ round(1.9)
 
 # Function body
 
-The **body** of a function contains all calculations.
+The **body** of a function contains all calculations - hopefully you know what to put here!   
 
 ```{r body, include = FALSE}
 convert_ounces_to_grams <- function(ounces, digits = 0) {
@@ -310,8 +342,6 @@ decorate_chunk("body") %>%
 ---
 
 # Function body
-
-The body of a function is **self contained**.
 
 Can write comments, create intermediate variables, just like in the rest of the code we write.
 
@@ -332,12 +362,11 @@ decorate_chunk("body-complicated") %>%
   flair("# Apply rounding")
 ```
 
-
 ---
 
 # Function body
 
-Function returns the last value computed by default.
+Function returns the last value computed by default - we don't have to tell it to return `round()...`
 
 ```{r body-return, include = FALSE}
 convert_ounces_to_grams <- function(ounces, digits = 0) {
@@ -384,11 +413,11 @@ decorate_chunk("return-early") %>%
   }")
 ```
 
+Return "early" via `round()`.
 
 ```{r}
 convert_ounces_to_grams(0)
 ```
-
 
 ---
 
@@ -404,4 +433,4 @@ Functions are **named** meaningfully to help you write easier to understand code
 
 They take **arguments** which dictate what data your function is run on and the details of how it's run.
 
-They have a **body**, which can contain complicated calculations, but is self contained.
+They have a **body**, which can contain complicated calculations.

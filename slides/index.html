@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Writing Functions in R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Sharla Gelfand" />
+    <script src="libs/header-attrs-2.6/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="pull.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Writing Functions in R
+## RStudio Instructor Certification Teaching Exam
+### Sharla Gelfand
+
+---
+
+class: center
+
+
+
+### You already know how to use functions!
+
+--
+
+.pull-left[
+Reading a CSV...
+
+`read_csv()`
+]
+
+--
+
+.pull-right[
+Calculating a mean...
+
+`mean()`
+]
+
+--
+
+.pull-left[
+Making a plot...
+
+`ggplot() + 
+  geom_point()`
+]
+
+--
+
+.pull-right[
+Fitting a model...
+
+`lm(y~x)`
+]
+
+--
+
+Functions help you organize and reuse code.
+
+Now let's write our own! 
+
+???
+
+As an R user, you already know how to use functions! Functions enable everything we do in R
+
+Functions allow you to better organize and reuse your code - so today we're going to learn how to write our own.
+
+---
+
+I love to cook!
+
+Americans give measurements in ounces.
+
+TODO picture
+
+--
+
+
+```r
+8 * 28.349
+```
+
+```
+## [1] 226.792
+```
+
+--
+
+
+```r
+16 * 28.349
+```
+
+```
+## [1] 453.584
+```
+
+--
+
+If I only had an R function instead of doing the same thing over and over
+
+---
+
+## Let's write one!
+
+--
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces) {&lt;br&gt;&amp;nbsp;&amp;nbsp;ounces * 28.349&lt;br&gt;}&lt;/code&gt;
+
+--
+
+
+```r
+convert_ounces_to_grams(ounces = 8)
+```
+
+```
+## [1] 226.792
+```
+
+--
+
+
+```r
+convert_ounces_to_grams(ounces = 16)
+```
+
+```
+## [1] 453.584
+```
+
+---
+
+# Components of a function
+
+
+&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;convert_ounces_to_grams&lt;/span&gt; &lt;- function(ounces) {&lt;br&gt;&amp;nbsp;&amp;nbsp;ounces * 28.349&lt;br&gt;}&lt;/code&gt;
+
+A function has a &lt;span style = "background-color: #ffff7f"&gt;**name**&lt;/span&gt;.
+
+---
+
+# Components of a function
+
+
+&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;convert_ounces_to_grams&lt;/span&gt; &lt;- function(&lt;span style="background-color:#ffbf7f"&gt;ounces&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;ounces * 28.349&lt;br&gt;}&lt;/code&gt;
+
+A function has a &lt;span style = "background-color: #ffff7f"&gt;**name**&lt;/span&gt;.
+
+It takes &lt;span style = "background-color: #ffbf7f"&gt;**arguments**&lt;/span&gt;.
+
+---
+
+# Components of a function
+
+
+&lt;code class ='r hljs remark-code'&gt;&lt;span style="background-color:#ffff7f"&gt;convert_ounces_to_grams&lt;/span&gt; &lt;- function(&lt;span style="background-color:#ffbf7f"&gt;ounces&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ff7f7f"&gt;ounces * 28.349&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
+
+A function has a &lt;span style = "background-color: #ffff7f"&gt;**name**&lt;/span&gt;.
+
+It takes &lt;span style = "background-color: #ffbf7f"&gt;**arguments**&lt;/span&gt;.
+
+The &lt;span style = "background-color: #ff7f7f"&gt;**body**&lt;/span&gt; contains code for calculations - whatever you're trying to achieve!
+
+---
+class: middle, center
+
+### Time for an exercise!
+
+---
+
+# Naming functions
+
+Clearly, meaningfully, unambiguously - write code that is easier to understand!
+
+--
+
+`convert_ounces_to_grams`
+
+--
+
+I like **snake_case**, some people like **camelCase** - use whatever feels right!
+
+???
+
+Functions should be named clearly and meaningfully, to help yourself write (and read!) code that is easier to understand - the names are for people as much as for computers!
+
+I like to use snake_case, but some people like camelCase - use whatever feels right for you!
+
+---
+class: center, middle
+
+### Time for an exercise!
+
+--
+
+Imagine you're writing a function to convert kilograms to pounds.
+
+Which name would you choose for your function?
+
+`weight_converter()`
+
+`convert_kg_to_lb()`
+
+`kgtolb()`
+
+`Kilogram_ToPounds()`
+
+---
+
+# Arguments
+
+Inputs that describe how the function runs.
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams(&lt;span style="background-color:#ffff7f"&gt;ounces = 8&lt;/span&gt;)&lt;/code&gt;
+
+```
+
+## [1] 226.792
+
+```
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams(&lt;span style="background-color:#ffff7f"&gt;ounces = 16&lt;/span&gt;)&lt;/code&gt;
+
+```
+
+## [1] 453.584
+
+```
+
+???
+
+ounces is an argument that describes what the function is being run on
+---
+
+# Arguments
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, &lt;span style="background-color:#ffff7f"&gt;digits) {&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;round(ounces * 28.349, digits = digits)&lt;br&gt;}&lt;/code&gt;
+
+
+```r
+convert_ounces_to_grams(ounces = 8, digits = 0)
+```
+
+```
+## [1] 227
+```
+
+
+```r
+convert_ounces_to_grams(ounces = 8, digits = 1)
+```
+
+```
+## [1] 226.8
+```
+
+???
+
+Can add more arguments that control *how* it's run - my scale doesn't have descimals
+
+---
+
+# Calling arguments
+
+It can be verbose to specify `ounces` every time!
+
+--
+
+You don't have to name the arguments if you're supplying them in the order they were defined
+
+
+```r
+convert_ounces_to_grams(8, 0)
+```
+
+```
+## [1] 227
+```
+
+--
+
+But sometimes that makes your code tough to understang
+
+
+```r
+convert_ounces_to_grams(8, digits = 0)
+```
+
+```
+## [1] 227
+```
+
+---
+
+# Default arguments
+
+A **default** value that your function uses for an argument if nothing is supplied
+
+### Live coding time!
+
+--
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, &lt;span style="background-color:#ffff7f"&gt;digits = 0&lt;/span&gt;) {&lt;br&gt;&amp;nbsp;&amp;nbsp;round(ounces * 28.349, digits = digits)&lt;br&gt;}&lt;/code&gt;
+
+--
+
+
+```r
+convert_ounces_to_grams(ounces = 8)
+```
+
+```
+## [1] 227
+```
+
+--
+
+Set the default to the value you want most often!
+
+--
+
+If you're using another well-known function, it's a good idea to have the defaults match!
+
+
+```r
+round(1.9)
+```
+
+```
+## [1] 2
+```
+
+---
+
+# Function body
+
+The **body** of a function contains all calculations - hopefully you know what to put here!   
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;round(ounces * 28.349, digits = digits)&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
+
+---
+
+# Function body
+
+Can write comments, create intermediate variables, just like in the rest of the code we write.
+
+If your function is complicated, best to split up the different steps and explain what's going on.
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;grams &lt;- ounces * 28.349&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;# Apply rounding&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;round(grams, digits = digits)&lt;br&gt;}&lt;/code&gt;
+
+---
+
+# Function body
+
+Function returns the last value computed by default - we don't have to tell it to return `round()...`
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;round(grams, digits = digits)&lt;/span&gt;&lt;br&gt;}&lt;/code&gt;
+
+---
+
+# Function body
+
+Sometimes you don't need to go through the whole function.
+
+What is 0 ounces?
+
+--
+
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;convert_ounces_to_grams &lt;- function(ounces, digits = 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style="background-color:#ffff7f"&gt;if (ounces == 0) {&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;return(0)&lt;br&gt;&amp;nbsp;&amp;nbsp;}&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;grams &lt;- ounces * 28.349&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp;&amp;nbsp;# Apply rounding&lt;br&gt;&amp;nbsp;&amp;nbsp;round(grams, digits = digits)&lt;br&gt;}&lt;/code&gt;
+
+Return "early" via `round()`.
+
+
+```r
+convert_ounces_to_grams(0)
+```
+
+```
+## [1] 0
+```
+
+---
+
+# Wrapping up
+
+
+```r
+convert_ounces_to_grams &lt;- function(ounces, digits = 0) {
+  round(ounces * 28.349, digits = digits)
+}
+```
+
+Functions are **named** meaningfully to help you write easier to understand code.
+
+They take **arguments** which dictate what data your function is run on and the details of how it's run.
+
+They have a **body**, which can contain complicated calculations.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
